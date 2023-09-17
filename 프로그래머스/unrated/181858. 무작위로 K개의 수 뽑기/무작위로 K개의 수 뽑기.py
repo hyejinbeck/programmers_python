@@ -1,18 +1,23 @@
-def solution(arr, k):    
-    unique_numbers = set()  # 고유한 숫자를 저장
-    result = []             # 결과 
+def solution(arr, k):
+    # arr 배열 중에 뭔갈 찾아야 한다. 
+    # k는 그 중에 무작위로 주워진뒤,,,
+        # 지금까지 나온적없는 수의 갯수만큼 배열 뒤에 추가 
+        # 어떻게 한다음에 결국 만들어진 길이 
     
-    for num in arr:
-        if num not in unique_numbers:
-            unique_numbers.add(num)  # 새로운 숫자를 집합에 추가
-            result.append(num)  # 결과 배열에 숫자를 추가합니다.
-
-        # 만약 고유한 숫자의 개수가 k와 같아지면 결과를 반환하고 함수 종료합니다.
-        if len(unique_numbers) == k:
-            return result
+    answer = []  # 결과
+    counting = 0  # 지금까지 나온적이 없는 수의 갯수 카운팅 
     
-    # k개보다 적은 수가 선택되면 나머지를 -1로 채웁니다.
-    while len(result) < k:
-        result.append(-1)
+    for num in arr:  # 일정한 범위 내에서 무작위로 수를 뽑은 후
+        if num not in answer:  #  지금까지 나온적이 없는 수이면
+            answer.append(num)  # 배열 맨 뒤에 추가
+            counting += 1  # 그리곤 몇개인지 카운팅 
+            # 이건 결국, 중복되지 않는 수의 갯수 
+        
+        if counting == k:  # 그 갯수가 결국 만들어질 길이 k 라면 종료
+            break
     
-    return result
+    # 완성될 배열의 길이가 k보다 작으면 나머지 값을 전부 -1로 채워서 return
+    while len(answer) < k:
+        answer.append(-1)
+    
+    return answer
